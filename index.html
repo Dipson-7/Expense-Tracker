@@ -1,64 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Expense Tracker</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="container">
-      <h1>Expense Tracker</h1>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dipson's Expense Tracker</title>
+  <link rel="icon" href="images.png" type="image/png"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="app">
 
-      <div class="balance-container">
-        <h2>Your Balance</h2>
-        <h1 id="balance">Npr 0.00</h1>
+  <div class="app-header">
+    <div class="app-title">Dipson's Money <span>Tracker</span></div>
+  </div>
 
-        <div class="summary">
-          <div class="income">
-            <h3>Income</h3>
-            <p id="income-amount">Npr 0.00</p>
-          </div>
-          <div class="expenses">
-            <h3>Expenses</h3>
-            <p id="expense-amount">Npr 0.00</p>
-          </div>
-        </div>
+  <div class="nav-bar">
+    <button class="nav-btn" id="btn-prev">&#8249;</button>
+    <div class="nav-label" id="nav-display">—</div>
+    <button class="nav-btn" id="btn-next">&#8250;</button>
+  </div>
+
+  <div class="balance-hero" id="balance-hero">
+    <div class="balance-left">
+      <div class="balance-tag">
+        <span id="balance-lbl-txt">Your Balance</span>
+        <span class="frozen-pill">🔒 Closed</span>
       </div>
-
-      <div class="main-content">
-        <div class="transaction-container">
-          <h2>Transactions</h2>
-          <ul id="transaction-list">
-            
-          </ul>
+      <div class="balance-main" id="balance-main">NPR 0</div>
+      <div class="balance-strip">
+        <div class="strip-item">
+          <div class="strip-lbl">Opening</div>
+          <div class="strip-val" id="s-opening">NPR 0</div>
         </div>
-
-        <div class="form-container">
-          <h2>Add Transaction</h2>
-
-          <form id="transaction-form">
-            <div class="form-group">
-              <label for="description">Description</label>
-              <input type="text" id="description" placeholder="Enter description..." required />
-            </div>
-
-            <div class="form-group">
-              <label for="amount">Amount</label>
-              <input type="number" id="amount" placeholder="Enter amount..." required />
-              <small>Use negative (-) for expenses</small>
-            </div>
-
-            <button type="submit">Add Transaction</button>
-          </form>
+        <div class="strip-item">
+          <div class="strip-lbl">Closing</div>
+          <div class="strip-val" id="s-closing">NPR 0</div>
         </div>
       </div>
     </div>
+    <div class="balance-right">
+      <div class="stat-chip">
+        <div class="stat-chip-lbl">Income</div>
+        <div class="stat-chip-val income-val" id="s-income">NPR 0</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-chip-lbl">Expenses</div>
+        <div class="stat-chip-val expense-val" id="s-expense">NPR 0</div>
+      </div>
+    </div>
+  </div>
 
-    <script src="script.js"></script>
-  </body>
+  <div class="body-grid">
+    <div class="tx-panel">
+      <div class="panel-title">Transactions <span id="month-badge">—</span></div>
+      <ul class="tx-list" id="tx-list"></ul>
+    </div>
+
+    <div class="right-panel" id="right-panel">
+      <div class="chart-card" id="chart-card" style="display:none;">
+        <div class="chart-card-title">Income vs Expenses</div>
+        <div class="donut-wrap">
+          <canvas id="donut-canvas"></canvas>
+          <div class="donut-center">
+            <div class="donut-center-lbl">Net</div>
+            <div class="donut-center-val" id="donut-net">—</div>
+          </div>
+        </div>
+        <div class="chart-legend">
+          <div class="leg-item"><span class="leg-dot leg-income"></span> Income</div>
+          <div class="leg-item"><span class="leg-dot leg-expense"></span> Expenses</div>
+        </div>
+      </div>
+
+      <div class="form-card" id="form-card">
+        <div class="panel-title">Add Transaction</div>
+        <div class="today-tag" id="today-tag">📅 —</div>
+        <div class="form-field">
+          <label for="inp-desc">Description</label>
+          <input type="text" id="inp-desc" placeholder="What was it for?"/>
+        </div>
+        <div class="form-field">
+          <label for="inp-amt">Amount</label>
+          <input type="number" id="inp-amt" placeholder="e.g. 5000 or -1200"/>
+          <small>Negative = expense &nbsp;·&nbsp; Positive = income</small>
+        </div>
+        <button class="add-btn" id="btn-add">+ Add Transaction</button>
+      </div>
+
+      <div class="frozen-panel" id="frozen-panel" style="display:none;">
+        <div class="frozen-icon">🔒</div>
+        <h3>No Activity</h3>
+        <p>This past month had no transactions recorded.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
 </html>
